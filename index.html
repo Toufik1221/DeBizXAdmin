@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeBiz X | Enterprise Security Suite</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Space Grotesk', 'Share Tech Mono', monospace;
+        }
+        
+        body {
+            background: #0a0c0f;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        /* Hacker Theme Glow Effects */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .glow-border {
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1);
+        }
+        
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 15px rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        /* Matrix Rain Effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+        }
+        
+        /* Terminal Style */
+        .terminal {
+            background: #0a0c0f;
+            border: 1px solid #00ffff33;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        .terminal-header {
+            border-bottom: 1px solid #00ffff33;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff00;
+        }
+        
+        .terminal-dot-red { background: #ff4444; }
+        .terminal-dot-yellow { background: #ffff00; }
+        
+        /* Scan Line Effect */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 255, 0.03) 50%);
+            background-size: 100% 4px;
+            animation: scan 8s linear infinite;
+            z-index: 1;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        /* Sidebar Cyber Style */
+        .cyber-sidebar {
+            background: linear-gradient(135deg, #0a0c0f 0%, #0d1117 100%);
+            border-right: 1px solid #00ffff33;
+        }
+        
+        /* Card Hacker Style */
+        .hacker-card {
+            background: rgba(10, 12, 15, 0.95);
+            border: 1px solid #00ffff33;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .hacker-card:hover {
+            border-color: #00ffff;
+            transform: translateY(-2px);
+        }
+        
+        /* Button Cyber Styles */
+        .cyber-btn {
+            background: linear-gradient(135deg, #00ffff11 0%, #00ffff22 100%);
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-btn:hover {
+            background: #00ffff;
+            color: #0a0c0f;
+            box-shadow: 0 0 20px #00ffff;
+            transform: scale(1.02);
+        }
+        
+        .cyber-btn-danger {
+            border-color: #ff4444;
+            color: #ff4444;
+        }
+        
+        .cyber-btn-danger:hover {
+            background: #ff4444;
+            color: #0a0c0f;
+            box-shadow: 0 0 20px #ff4444;
+        }
+        
+        .cyber-btn-success {
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+        
+        .cyber-btn-success:hover {
+            background: #00ff88;
+            color: #0a0c0f;
+            box-shadow: 0 0 20px #00ff88;
+        }
+        
+        /* Table Styles */
+        .cyber-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .cyber-table th {
+            background: rgba(0, 255, 255, 0.05);
+            color: #00ffff;
+            padding: 12px;
+            text-align: left;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #00ffff33;
+        }
+        
+        .cyber-table td {
+            padding: 12px;
+            border-bottom: 1px solid #00ffff11;
+            color: #ccd6f6;
+        }
+        
+        .cyber-table tr:hover {
+            background: rgba(0, 255, 255, 0.05);
+        }
+        
+        /* Status Badges */
+        .status-active {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .status-inactive {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid #ff4444;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .status-blocked {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid #ff4444;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* Modal Cyber */
+        .cyber-modal {
+            background: linear-gradient(135deg, #0a0c0f 0%, #0d1117 100%);
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+        }
+        
+        /* Input Cyber */
+        .cyber-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ffff33;
+            color: #00ffff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .cyber-input::placeholder {
+            color: #00ffff55;
+        }
+        
+        /* Scrollbar Cyber */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0c0f;
+            border-left: 1px solid #00ffff33;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #00ffff;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ffffcc;
+        }
+        
+        /* Loading Animation */
+        .cyber-loading {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #00ffff33;
+            border-top-color: #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Typing Effect */
+        .typing {
+            overflow: hidden;
+            border-right: 2px solid #00ffff;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ffff; }
+        }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: skew(0deg, 0deg); opacity: 1; }
+            95% { transform: skew(0deg, 0deg); opacity: 1; }
+            96% { transform: skew(5deg, 2deg); opacity: 0.8; }
+            97% { transform: skew(-3deg, -1deg); opacity: 0.9; }
+            98% { transform: skew(0deg, 0deg); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+
+<!-- Matrix Rain Background -->
+<canvas id="matrixCanvas" class="matrix-bg"></canvas>
+<div class="scan-line"></div>
+
+<!-- Main App Container -->
+<div id="app" class="flex h-screen relative z-10">
+    <!-- Sidebar -->
+    <div class="cyber-sidebar fixed lg:relative w-72 z-30 transform -translate-x-full lg:translate-x-0 transition-transform duration-300" id="sidebar">
+        <div class="flex flex-col h-full">
+            <!-- Logo Section -->
+            <div class="p-6 border-b border-[#00ffff33]">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shield-haltered text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-cyan-400 glow-text">DeBiz X</h1>
+                            <p class="text-[10px] text-cyan-500/60 tracking-wider">SECURE ENTERPRISE SUITE</p>
+                        </div>
+                    </div>
+                    <button onclick="toggleSidebar()" class="lg:hidden text-cyan-400">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="mt-4 terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dot terminal-dot-red"></div>
+                        <div class="terminal-dot terminal-dot-yellow"></div>
+                        <div class="terminal-dot"></div>
+                        <span class="text-[10px] text-cyan-400 ml-2">root@debizx:~</span>
+                    </div>
+                    <p class="text-xs text-cyan-400/80 font-mono">> System status: <span class="text-green-400">ACTIVE</span></p>
+                    <p class="text-xs text-cyan-400/80 font-mono">> Security level: <span class="text-yellow-400">MAXIMUM</span></p>
+                    <p class="text-xs text-cyan-400/80 font-mono">> Encryption: <span class="text-green-400">AES-256</span></p>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+                <a href="#" onclick="navigateTo('dashboard')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">DASHBOARD</span>
+                    <span class="ml-auto text-[10px] text-cyan-500/40">/monitor</span>
+                </a>
+                <a href="#" onclick="navigateTo('users')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="users">
+                    <i class="fas fa-users w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">USER DATABASE</span>
+                    <span class="ml-auto text-[10px] text-cyan-500/40">/access</span>
+                </a>
+                <a href="#" onclick="navigateTo('subscriptions')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="subscriptions">
+                    <i class="fas fa-credit-card w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">SUBSCRIPTIONS</span>
+                    <span class="ml-auto text-[10px] text-cyan-500/40">/billing</span>
+                </a>
+                <a href="#" onclick="navigateTo('modules')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="modules">
+                    <i class="fas fa-puzzle-piece w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">MODULES</span>
+                    <span class="ml-auto text-[10px] text-cyan-500/40">/plugins</span>
+                </a>
+                <a href="#" onclick="navigateTo('payments')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="payments">
+                    <i class="fas fa-dollar-sign w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">TRANSACTIONS</span>
+                    <span class="ml-auto text-[10px] text-cyan-500/40">/ledger</span>
+                </a>
+                <a href="#" onclick="navigateTo('analytics')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="analytics">
+                    <i class="fas fa-chart-line w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">ANALYTICS</span>
+                    <span class="ml-auto text-[10px] text-cyan-500/40">/stats</span>
+                </a>
+                <a href="#" onclick="navigateTo('security')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="security">
+                    <i class="fas fa-shield-alt w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">SECURITY</span>
+                    <span class="ml-auto text-[10px] text-cyan-500/40">/firewall</span>
+                </a>
+                <a href="#" onclick="navigateTo('settings')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="settings">
+                    <i class="fas fa-cog w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">CONFIG</span>
+                    <span class="ml-auto text-[10px] text-cyan-500/40">/system</span>
+                </a>
+            </nav>
+            
+            <!-- System Status -->
+            <div class="p-4 border-t border-[#00ffff33]">
+                <div class="terminal text-xs">
+                    <p class="text-cyan-400">> CONNECTION: <span class="text-green-400">SECURE</span></p>
+                    <p class="text-cyan-400">> ENCRYPTION: <span class="text-green-400">ACTIVE</span></p>
+                    <p class="text-cyan-400">> FIREWALL: <span class="text-green-400">UP</span></p>
+                    <div class="mt-2 h-1 bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Header -->
+        <header class="bg-black/50 backdrop-blur-md border-b border-[#00ffff33] sticky top-0 z-20">
+            <div class="flex items-center justify-between px-6 py-3">
+                <button onclick="toggleSidebar()" class="lg:hidden text-cyan-400 hover:text-cyan-300">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                
+                <div class="flex items-center space-x-6">
+                    <!-- Search -->
+                    <div class="hidden md:block relative">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-500/50 text-sm"></i>
+                        <input type="text" id="globalSearch" placeholder="Search database..." class="cyber-input pl-9 pr-4 py-2 text-sm w-80">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="relative">
+                        <i class="fas fa-bell text-cyan-400/70 cursor-pointer hover:text-cyan-400 text-xl"></i>
+                        <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                    </div>
+                    
+                    <!-- User -->
+                    <div class="flex items-center space-x-3">
+                        <div class="text-right">
+                            <p class="text-sm font-medium text-cyan-400" id="headerUserName">Admin</p>
+                            <p class="text-xs text-cyan-500/60">ROOT ACCESS</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full border-2 border-cyan-400 flex items-center justify-center bg-cyan-500/10">
+                            <i class="fas fa-user-secret text-cyan-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <main class="flex-1 overflow-y-auto p-6">
+            <div id="pageContent">
+                <div class="flex justify-center items-center h-64">
+                    <div class="cyber-loading"></div>
+                    <span class="ml-3 text-cyan-400 font-mono">INITIALIZING SECURE CONNECTION...</span>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Login Modal (Hacker Theme) -->
+<div id="loginModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center">
+    <div class="cyber-modal rounded-2xl w-full max-w-md p-8 modal relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+        
+        <div class="text-center mb-8">
+            <div class="w-24 h-24 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-cyan-500/30">
+                <i class="fas fa-shield-haltered text-white text-4xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-cyan-400 glow-text">DeBiz X</h2>
+            <p class="text-cyan-500/60 text-sm mt-1 font-mono">SECURE ACCESS PORTAL v4.0</p>
+            <div class="mt-3 text-xs text-cyan-500/40 font-mono">
+                <span id="encryptionStatus">ESTABLISHING SECURE CHANNEL...</span>
+            </div>
+        </div>
+        
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="mb-5">
+                <label class="block text-sm font-mono text-cyan-400 mb-2">
+                    <i class="fas fa-envelope mr-2"></i> ACCESS ID / EMAIL
+                </label>
+                <input type="email" id="loginEmail" class="cyber-input" placeholder="admin@debizx.com" required value="admin@debizx.com">
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-mono text-cyan-400 mb-2">
+                    <i class="fas fa-key mr-2"></i> SECURITY KEY / PASSWORD
+                </label>
+                <input type="password" id="loginPassword" class="cyber-input" placeholder="••••••••" required value="Admin@123">
+            </div>
+            <button type="submit" class="cyber-btn w-full py-3 font-bold tracking-wider">
+                <i class="fas fa-unlock-alt mr-2"></i> AUTHENTICATE
+            </button>
+        </form>
+        
+        <div class="mt-6 text-center text-xs text-cyan-500/40 font-mono">
+            <p>SECURE ENCRYPTED CONNECTION | AES-256 | TLS 1.3</p>
+            <p class="mt-1">Powered by DeBiz X Security Suite</p>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="fixed bottom-4 right-4 z-50"></div>
+
+<script>
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()<>?{}[]";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    
+    for (let i = 0; i < columns; i++) {
+        drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
+    }
+    
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(10, 12, 15, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#00ffff';
+        ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillStyle = `rgba(0, 255, 255, ${Math.random() * 0.5 + 0.2})`;
+            ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    
+    setInterval(drawMatrix, 50);
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    
+    // Encryption status animation
+    let statusTexts = ["ESTABLISHING SECURE CHANNEL...", "HANDSHAKE COMPLETE", "ENCRYPTION ACTIVE", "SECURE CONNECTION ESTABLISHED"];
+    let statusIndex = 0;
+    setInterval(() => {
+        const statusEl = document.getElementById('encryptionStatus');
+        if (statusEl) {
+            statusIndex = (statusIndex + 1) % statusTexts.length;
+            statusEl.textContent = statusTexts[statusIndex];
+        }
+    }, 1500);
+    
+    // ============================================
+    // DeBiz X SECURE SYSTEM - COMPLETE ECOSYSTEM
+    // ============================================
+    
+    let currentUser = null;
+    let currentPage = 'dashboard';
+    
+    // Initialize secure database
+    function initDatabase() {
+        if (!localStorage.getItem('debizx_users')) {
+            const defaultUsers = [
+                { id: '1', fullName: 'Root Admin', email: 'admin@debizx.com', password: btoa('Admin@123'), role: 'super_admin', status: 'active', phone: '+8801712345678', company: 'DeBiz X', createdAt: new Date().toISOString(), lastLogin: null, securityLevel: 5 },
+                { id: '2', fullName: 'John Doe', email: 'john@debizx.com', password: btoa('John@123'), role: 'client', status: 'active', phone: '+8801712345679', company: 'Tech Solutions', createdAt: new Date().toISOString(), lastLogin: null, securityLevel: 2 },
+                { id: '3', fullName: 'Jane Smith', email: 'jane@debizx.com', password: btoa('Jane@123'), role: 'manager', status: 'active', phone: '+8801712345680', company: 'Creative Agency', createdAt: new Date().toISOString(), lastLogin: null, securityLevel: 3 }
+            ];
+            localStorage.setItem('debizx_users', JSON.stringify(defaultUsers));
+        }
+        
+        if (!localStorage.getItem('debizx_subscriptions')) {
+            localStorage.setItem('debizx_subscriptions', JSON.stringify([]));
+        }
+        
+        if (!localStorage.getItem('debizx_modules')) {
+            const defaultModules = [
+                { id: '1', name: 'core_security', displayName: 'Core Security Module', version: '3.2.0', isActive: true, isGlobal: true, description: 'Enterprise grade security and encryption', icon: 'fa-shield-haltered' },
+                { id: '2', name: 'intrusion_detection', displayName: 'Intrusion Detection', version: '2.1.0', isActive: true, isGlobal: true, description: 'Real-time threat monitoring', icon: 'fa-eye' },
+                { id: '3', name: 'data_encryption', displayName: 'Data Encryption Engine', version: '1.8.0', isActive: true, isGlobal: true, description: 'AES-256 encryption for all data', icon: 'fa-lock' },
+                { id: '4', name: 'analytics_suite', displayName: 'Analytics Suite', version: '1.5.0', isActive: true, isGlobal: false, description: 'Advanced analytics and reporting', icon: 'fa-chart-line' }
+            ];
+            localStorage.setItem('debizx_modules', JSON.stringify(defaultModules));
+        }
+        
+        if (!localStorage.getItem('debizx_activities')) {
+            localStorage.setItem('debizx_activities', JSON.stringify([]));
+        }
+        
+        if (!localStorage.getItem('debizx_settings')) {
+            localStorage.setItem('debizx_settings', JSON.stringify({
+                systemName: 'DeBiz X',
+                securityLevel: 'MAXIMUM',
+                encryptionEnabled: true,
+                twoFactorRequired: true,
+                sessionTimeout: 15,
+                auditLogRetention: 90
+            }));
+        }
+    }
+    
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = `mb-2 p-3 rounded-lg border font-mono text-sm animate-slide-up bg-black/90 backdrop-blur-md border-${type === 'success' ? 'green-500' : type === 'error' ? 'red-500' : 'cyan-500'} text-${type === 'success' ? 'green-400' : type === 'error' ? 'red-400' : 'cyan-400'}`;
+        toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : 'info-circle'} mr-2"></i>${message}`;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+    
+    function getUsers() { return JSON.parse(localStorage.getItem('debizx_users') || '[]'); }
+    function saveUsers(users) { localStorage.setItem('debizx_users', JSON.stringify(users)); }
+    function getModules() { return JSON.parse(localStorage.getItem('debizx_modules') || '[]'); }
+    function saveModules(modules) { localStorage.setItem('debizx_modules', JSON.stringify(modules)); }
+    function getSubscriptions() { return JSON.parse(localStorage.getItem('debizx_subscriptions') || '[]'); }
+    function saveSubscriptions(subs) { localStorage.setItem('debizx_subscriptions', JSON.stringify(subs)); }
+    function getPayments() { return JSON.parse(localStorage.getItem('debizx_payments') || '[]'); }
+    
+    function addActivity(userId, action, details) {
+        const activities = JSON.parse(localStorage.getItem('debizx_activities') || '[]');
+        activities.unshift({ id: Date.now(), userId, action, details, timestamp: new Date().toISOString(), ip: 'SECURE' });
+        if (activities.length > 100) activities.pop();
+        localStorage.setItem('debizx_activities', JSON.stringify(activities));
+    }
+    
+    // Authentication
+    function checkAuth() {
+        const token = localStorage.getItem('debizx_token');
+        if (token) {
+            const userData = JSON.parse(atob(token));
+            const users = getUsers();
+            const user = users.find(u => u.id === userData.id);
+            if (user && user.status === 'active') {
+                currentUser = user;
+                document.getElementById('headerUserName').innerText = user.fullName;
+                document.getElementById('loginModal')?.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    async function handleLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        const users = getUsers();
+        const user = users.find(u => u.email === email && atob(u.password) === password);
+        
+        if (user && user.status !== 'blocked') {
+            currentUser = user;
+            const token = btoa(JSON.stringify({ id: user.id, email: user.email, role: user.role }));
+            localStorage.setItem('debizx_token', token);
+            user.lastLogin = new Date().toISOString();
+            saveUsers(users);
+            addActivity(user.id, 'AUTH_SUCCESS', 'Secure authentication completed');
+            
+            document.getElementById('loginModal').remove();
+            showToast('ACCESS GRANTED. Welcome to DeBiz X.', 'success');
+            loadPage('dashboard');
+        } else {
+            addActivity('unknown', 'AUTH_FAILED', `Failed login attempt for ${email}`);
+            showToast('ACCESS DENIED. Invalid credentials.', 'error');
+        }
+    }
+    
+    function logout() {
+        if (currentUser) addActivity(currentUser.id, 'LOGOUT', 'User session terminated');
+        localStorage.removeItem('debizx_token');
+        location.reload();
+    }
+    
+    // Navigation
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('-translate-x-full');
+    }
+    
+    function navigateTo(page) {
+        currentPage = page;
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('bg-cyan-500/10', 'text-cyan-400'));
+        const activeItem = document.querySelector(`[data-page="${page}"]`);
+        if (activeItem) activeItem.classList.add('bg-cyan-500/10', 'text-cyan-400');
+        loadPage(page);
+        if (window.innerWidth < 1024) toggleSidebar();
+    }
+    
+    async function loadPage(page) {
+        const contentDiv = document.getElementById('pageContent');
+        contentDiv.innerHTML = '<div class="flex justify-center items-center h-64"><div class="cyber-loading"></div><span class="ml-3 text-cyan-400 font-mono">LOADING SECURE DATA...</span></div>';
+        
+        switch(page) {
+            case 'dashboard': await renderDashboard(); break;
+            case 'users': await renderUsers(); break;
+            case 'subscriptions': await renderSubscriptions(); break;
+            case 'modules': await renderModules(); break;
+            case 'payments': await renderPayments(); break;
+            case 'analytics': await renderAnalytics(); break;
+            case 'security': await renderSecurity(); break;
+            case 'settings': await renderSettings(); break;
+            default: await renderDashboard();
+        }
+    }
+    
+    async function renderDashboard() {
+        const users = getUsers();
+        const modules = getModules();
+        const activities = JSON.parse(localStorage.getItem('debizx_activities') || '[]').slice(0, 6);
+        
+        const html = `
+            <div>
+                <!-- Header -->
+                <div class="mb-8">
+                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
+                        <i class="fas fa-terminal"></i>
+                        <span>root@debizx:/dashboard</span>
+                        <span class="text-gray-600">$</span>
+                    </div>
+                    <h1 class="text-3xl font-bold text-cyan-400 glow-text glitch">SECURE DASHBOARD</h1>
+                    <p class="text-gray-400 mt-1 font-mono">Welcome back, ${currentUser?.fullName}. System security level: MAXIMUM</p>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="hacker-card rounded-xl p-6 glow-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-cyan-400/60 text-xs font-mono tracking-wider">TOTAL USERS</p>
+                                <p class="text-3xl font-bold text-cyan-400 mt-1">${users.length}</p>
+                                <p class="text-green-400 text-xs mt-2"><i class="fas fa-arrow-up"></i> +12%</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                                <i class="fas fa-users text-cyan-400 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hacker-card rounded-xl p-6 glow-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-cyan-400/60 text-xs font-mono tracking-wider">ACTIVE MODULES</p>
+                                <p class="text-3xl font-bold text-cyan-400 mt-1">${modules.filter(m => m.isActive).length}</p>
+                                <p class="text-green-400 text-xs mt-2"><i class="fas fa-arrow-up"></i> +2</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                                <i class="fas fa-puzzle-piece text-cyan-400 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hacker-card rounded-xl p-6 glow-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-cyan-400/60 text-xs font-mono tracking-wider">SECURITY SCORE</p>
+                                <p class="text-3xl font-bold text-green-400 mt-1">98.5%</p>
+                                <p class="text-green-400 text-xs mt-2"><i class="fas fa-shield-alt"></i> PROTECTED</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center justify-center">
+                                <i class="fas fa-shield-haltered text-green-400 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hacker-card rounded-xl p-6 glow-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-cyan-400/60 text-xs font-mono tracking-wider">ENCRYPTION</p>
+                                <p class="text-3xl font-bold text-cyan-400 mt-1">AES-256</p>
+                                <p class="text-green-400 text-xs mt-2"><i class="fas fa-lock"></i> ACTIVE</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                                <i class="fas fa-lock text-cyan-400 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4 font-mono"><i class="fas fa-chart-line mr-2"></i> SECURITY THREAT MONITOR</h3>
+                        <canvas id="threatChart" height="250"></canvas>
+                    </div>
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4 font-mono"><i class="fas fa-users mr-2"></i> ACCESS LOGS</h3>
+                        <canvas id="accessChart" height="250"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Recent Security Events -->
+                <div class="hacker-card rounded-xl overflow-hidden">
+                    <div class="px-6 py-4 border-b border-[#00ffff33] bg-cyan-500/5">
+                        <h3 class="font-semibold text-cyan-400 font-mono"><i class="fas fa-list-alt mr-2"></i> SECURITY EVENT LOG</h3>
+                    </div>
+                    <div class="divide-y divide-[#00ffff11]">
+                        ${activities.length > 0 ? activities.map(activity => `
+                            <div class="px-6 py-3 flex items-center justify-between hover:bg-cyan-500/5">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
+                                    <div>
+                                        <p class="text-sm text-gray-300 font-mono">[${new Date(activity.timestamp).toLocaleString()}] ${activity.action}</p>
+                                        <p class="text-xs text-cyan-500/60 font-mono">${activity.details || 'System event'}</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-cyan-500/40 text-xs"></i>
+                            </div>
+                        `).join('') : '<div class="px-6 py-4 text-center text-gray-500 font-mono">No security events recorded</div>'}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('pageContent').innerHTML = html;
+        
+        const threatCtx = document.getElementById('threatChart')?.getContext('2d');
+        if (threatCtx) {
+            new Chart(threatCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Threat Level',
+                        data: [12, 19, 8, 15, 22, 10, 7],
+                        borderColor: '#00ffff',
+                        backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { labels: { color: '#00ffff' } } } }
+            });
+        }
+        
+        const accessCtx = document.getElementById('accessChart')?.getContext('2d');
+        if (accessCtx) {
+            new Chart(accessCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Access Attempts',
+                        data: [45, 52, 48, 61, 55, 42, 38],
+                        backgroundColor: '#00ffff',
+                        borderRadius: 8
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { labels: { color: '#00ffff' } } } }
+            });
+        }
+    }
+    
+    async function renderUsers() {
+        const users = getUsers();
+        
+        const html = `
+            <div>
+                <div class="mb-6">
+                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
+                        <i class="fas fa-terminal"></i>
+                        <span>root@debizx:/users</span>
+                    </div>
+                    <h1 class="text-3xl font-bold text-cyan-400">USER DATABASE</h1>
+                    <p class="text-gray-400 mt-1 font-mono">Manage access control and user permissions</p>
+                </div>
+                
+                <div class="hacker-card rounded-xl overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="cyber-table">
+                            <thead>
+                                <tr><th>USER</th><th>ROLE</th><th>STATUS</th><th>SECURITY LEVEL</th><th>LAST ACCESS</th><th>ACTIONS</th></tr>
+                            </thead>
+                            <tbody>
+                                ${users.map(user => `
+                                    <tr>
+                                        <td><div><p class="font-medium text-cyan-400">${user.fullName}</p><p class="text-xs text-gray-500 font-mono">${user.email}</p></div></td>
+                                        <td><span class="px-2 py-1 text-xs rounded border border-cyan-500/50 text-cyan-400">${user.role.toUpperCase()}</span></td>
+                                        <td><span class="status-${user.status}">${user.status.toUpperCase()}</span></td>
+                                        <td><span class="text-green-400">LEVEL ${user.securityLevel || 1}</span></td>
+                                        <td class="font-mono text-xs">${user.lastLogin ? new Date(user.lastLogin).toLocaleString() : 'NEVER'}</td>
+                                        <td><button onclick="toggleUserStatus('${user.id}')" class="text-yellow-400 hover:text-yellow-300 mr-2"><i class="fas fa-ban"></i></button><button onclick="deleteUser('${user.id}')" class="text-red-400 hover:text-red-300"><i class="fas fa-trash"></i></button></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.getElementById('pageContent').innerHTML = html;
+    }
+    
+    async function renderModules() {
+        const modules = getModules();
+        
+        const html = `
+            <div>
+                <div class="mb-6">
+                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
+                        <i class="fas fa-terminal"></i>
+                        <span>root@debizx:/modules</span>
+                    </div>
+                    <h1 class="text-3xl font-bold text-cyan-400">SECURITY MODULES</h1>
+                    <p class="text-gray-400 mt-1 font-mono">Manage system modules and security features</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    ${modules.map(module => `
+                        <div class="hacker-card rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                                    <i class="fas ${module.icon || 'fa-cube'} text-cyan-400 text-xl"></i>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer" ${module.isActive ? 'checked' : ''} onchange="toggleModule('${module.id}')">
+                                    <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-cyan-400 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500/30"></div>
+                                </label>
+                            </div>
+                            <h3 class="text-lg font-bold text-cyan-400">${module.displayName}</h3>
+                            <p class="text-xs text-cyan-500/60 font-mono mt-1">v${module.version}</p>
+                            <p class="text-sm text-gray-400 mt-2">${module.description}</p>
+                            <div class="mt-4 pt-4 border-t border-[#00ffff11] flex justify-between">
+                                <span class="text-xs text-cyan-500"><i class="fas ${module.isGlobal ? 'fa-globe' : 'fa-shield'} mr-1"></i>${module.isGlobal ? 'GLOBAL' : 'PER USER'}</span>
+                                <button class="text-xs text-cyan-400 hover:text-cyan-300"><i class="fas fa-cog mr-1"></i>CONFIGURE</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        document.getElementById('pageContent').innerHTML = html;
+    }
+    
+    function toggleModule(moduleId) {
+        const modules = getModules();
+        const module = modules.find(m => m.id === moduleId);
+        if (module) {
+            module.isActive = !module.isActive;
+            saveModules(modules);
+            showToast(`${module.displayName} ${module.isActive ? 'ACTIVATED' : 'DEACTIVATED'}`, 'success');
+            renderModules();
+        }
+    }
+    
+    function toggleUserStatus(userId) {
+        const users = getUsers();
+        const user = users.find(u => u.id === userId);
+        if (user && user.role !== 'super_admin') {
+            user.status = user.status === 'active' ? 'blocked' : 'active';
+            saveUsers(users);
+            showToast(`User ${user.fullName} ${user.status === 'active' ? 'UNBLOCKED' : 'BLOCKED'}`, 'success');
+            renderUsers();
+        }
+    }
+    
+    function deleteUser(userId) {
+        if (confirm('WARNING: This action cannot be undone. Delete user?')) {
+            const users = getUsers();
+            const filtered = users.filter(u => u.id !== userId);
+            saveUsers(filtered);
+            showToast('User deleted from database', 'success');
+            renderUsers();
+        }
+    }
+    
+    async function renderSubscriptions() { document.getElementById('pageContent').innerHTML = '<div class="hacker-card rounded-xl p-8 text-center"><i class="fas fa-credit-card text-cyan-400 text-4xl mb-4"></i><h3 class="text-xl text-cyan-400">Subscription Manager</h3><p class="text-gray-400 mt-2 font-mono">Module under construction</p></div>'; }
+    async function renderPayments() { document.getElementById('pageContent').innerHTML = '<div class="hacker-card rounded-xl p-8 text-center"><i class="fas fa-dollar-sign text-cyan-400 text-4xl mb-4"></i><h3 class="text-xl text-cyan-400">Transaction Ledger</h3><p class="text-gray-400 mt-2 font-mono">Module under construction</p></div>'; }
+    async function renderAnalytics() { document.getElementById('pageContent').innerHTML = '<div class="hacker-card rounded-xl p-8 text-center"><i class="fas fa-chart-line text-cyan-400 text-4xl mb-4"></i><h3 class="text-xl text-cyan-400">Analytics Engine</h3><p class="text-gray-400 mt-2 font-mono">Module under construction</p></div>'; }
+    
+    async function renderSecurity() {
+        const html = `
+            <div>
+                <div class="mb-6">
+                    <h1 class="text-3xl font-bold text-cyan-400">SECURITY CENTER</h1>
+                    <p class="text-gray-400 mt-1 font-mono">Firewall rules, encryption settings, and security policies</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4"><i class="fas fa-shield-alt mr-2"></i>FIREWALL STATUS</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Inbound Traffic</span><span class="text-green-400">BLOCKED</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Outbound Traffic</span><span class="text-green-400">MONITORED</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">DDoS Protection</span><span class="text-green-400">ACTIVE</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Rate Limiting</span><span class="text-green-400">ENABLED</span></div>
+                        </div>
+                    </div>
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4"><i class="fas fa-lock mr-2"></i>ENCRYPTION STATUS</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Database</span><span class="text-green-400">AES-256</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">TLS Version</span><span class="text-green-400">1.3</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Key Rotation</span><span class="text-green-400">30 DAYS</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Backup Encryption</span><span class="text-green-400">ENABLED</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.getElementById('pageContent').innerHTML = html;
+    }
+    
+    async function renderSettings() {
+        const html = `
+            <div>
+                <div class="mb-6">
+                    <h1 class="text-3xl font-bold text-cyan-400">SYSTEM CONFIGURATION</h1>
+                    <p class="text-gray-400 mt-1 font-mono">DeBiz X Enterprise Security Suite v4.0</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4">Powered by DeBiz X</h3>
+                        <p class="text-gray-400 font-mono text-sm">Enterprise Security Suite | All Rights Reserved</p>
+                        <div class="mt-4 pt-4 border-t border-[#00ffff11]">
+                            <p class="text-xs text-cyan-500/60 font-mono">© 2024 DeBiz X. All systems operational.</p>
+                        </div>
+                    </div>
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4">System Health</h3>
+                        <div class="space-y-3">
+                            <div><div class="flex justify-between text-sm mb-1"><span>CPU Usage</span><span>23%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:23%"></div></div></div>
+                            <div><div class="flex justify-between text-sm mb-1"><span>Memory Usage</span><span>45%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:45%"></div></div></div>
+                            <div><div class="flex justify-between text-sm mb-1"><span>Storage</span><span>32%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:32%"></div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.getElementById('pageContent').innerHTML = html;
+    }
+    
+    // Export global functions
+    window.toggleSidebar = toggleSidebar;
+    window.navigateTo = navigateTo;
+    window.handleLogin = handleLogin;
+    window.toggleModule = toggleModule;
+    window.toggleUserStatus = toggleUserStatus;
+    window.deleteUser = deleteUser;
+    
+    // Initialize
+    initDatabase();
+    if (checkAuth()) loadPage('dashboard');
+    document.querySelector('[data-page="dashboard"]')?.classList.add('bg-cyan-500/10', 'text-cyan-400');
+</script>
+</body>
+</html>
