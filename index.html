@@ -2,8 +2,8 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>DeBiz X | Enterprise Security Backend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeBiz X | Enterprise Security Suite</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,76 +14,38 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Three.js for 3D Background -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <!-- GSAP for Advanced Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         * {
-            font-family: 'Share Tech Mono', 'Space Grotesk', monospace;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-family: 'Space Grotesk', 'Share Tech Mono', monospace;
         }
-        
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
         body {
-            background: #050505;
-            overflow-x: hidden;
+            background: #0a0c0f;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
         
-        /* Advanced Glitch Effects */
-        .glitch-text {
-            position: relative;
-            animation: glitch-skew 3s infinite linear alternate-reverse;
+        /* Hacker Theme Glow Effects */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
         }
         
-        @keyframes glitch-skew {
-            0% { transform: skew(0deg, 0deg); }
-            95% { transform: skew(0deg, 0deg); }
-            96% { transform: skew(5deg, 2deg); opacity: 0.8; text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
-            97% { transform: skew(-3deg, -1deg); opacity: 0.9; }
-            98% { transform: skew(0deg, 0deg); opacity: 1; }
+        .glow-border {
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1);
         }
         
-        /* Cyberpunk Border Animations */
-        .cyber-border {
-            position: relative;
-            overflow: hidden;
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 15px rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
         
-        .cyber-border::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff, #ff00ff);
-            background-size: 400% 400%;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
-            border-radius: inherit;
-            animation: borderGlow 3s ease infinite;
-        }
-        
-        .cyber-border:hover::before {
-            opacity: 0.5;
-        }
-        
-        @keyframes borderGlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Neural Network Background */
-        #networkCanvas {
+        /* Matrix Rain Effect */
+        .matrix-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -94,134 +56,205 @@
             opacity: 0.15;
         }
         
-        /* Holographic Cards */
-        .holo-card {
-            background: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 16px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .holo-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
-            transform: rotate(45deg);
-            animation: shine 8s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-        
-        .holo-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-        }
-        
-        /* Futuristic Button */
-        .neo-btn {
-            position: relative;
-            background: transparent;
-            border: 1.5px solid #00ffff;
-            color: #00ffff;
-            padding: 10px 24px;
+        /* Terminal Style */
+        .terminal {
+            background: #0a0c0f;
+            border: 1px solid #00ffff33;
             border-radius: 8px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            overflow: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
+            padding: 1rem;
+            font-family: 'Share Tech Mono', monospace;
         }
         
-        .neo-btn::before {
-            content: '';
-            position: absolute;
+        .terminal-header {
+            border-bottom: 1px solid #00ffff33;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff00;
+        }
+        
+        .terminal-dot-red { background: #ff4444; }
+        .terminal-dot-yellow { background: #ffff00; }
+        
+        /* Scan Line Effect */
+        .scan-line {
+            position: fixed;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, #00ffff33, transparent);
-            transition: left 0.5s;
+            pointer-events: none;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 255, 0.03) 50%);
+            background-size: 100% 4px;
+            animation: scan 8s linear infinite;
+            z-index: 1;
         }
         
-        .neo-btn:hover::before {
-            left: 100%;
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
         
-        .neo-btn:hover {
+        /* Sidebar Cyber Style */
+        .cyber-sidebar {
+            background: linear-gradient(135deg, #0a0c0f 0%, #0d1117 100%);
+            border-right: 1px solid #00ffff33;
+        }
+        
+        /* Card Hacker Style */
+        .hacker-card {
+            background: rgba(10, 12, 15, 0.95);
+            border: 1px solid #00ffff33;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .hacker-card:hover {
+            border-color: #00ffff;
+            transform: translateY(-2px);
+        }
+        
+        /* Button Cyber Styles */
+        .cyber-btn {
+            background: linear-gradient(135deg, #00ffff11 0%, #00ffff22 100%);
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-btn:hover {
             background: #00ffff;
-            color: #050505;
+            color: #0a0c0f;
             box-shadow: 0 0 20px #00ffff;
-            text-shadow: none;
+            transform: scale(1.02);
         }
         
-        /* Terminal Input */
-        .terminal-input {
-            background: rgba(0, 0, 0, 0.8);
+        .cyber-btn-danger {
+            border-color: #ff4444;
+            color: #ff4444;
+        }
+        
+        .cyber-btn-danger:hover {
+            background: #ff4444;
+            color: #0a0c0f;
+            box-shadow: 0 0 20px #ff4444;
+        }
+        
+        .cyber-btn-success {
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+        
+        .cyber-btn-success:hover {
+            background: #00ff88;
+            color: #0a0c0f;
+            box-shadow: 0 0 20px #00ff88;
+        }
+        
+        /* Table Styles */
+        .cyber-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .cyber-table th {
+            background: rgba(0, 255, 255, 0.05);
+            color: #00ffff;
+            padding: 12px;
+            text-align: left;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #00ffff33;
+        }
+        
+        .cyber-table td {
+            padding: 12px;
+            border-bottom: 1px solid #00ffff11;
+            color: #ccd6f6;
+        }
+        
+        .cyber-table tr:hover {
+            background: rgba(0, 255, 255, 0.05);
+        }
+        
+        /* Status Badges */
+        .status-active {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .status-inactive {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid #ff4444;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .status-blocked {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid #ff4444;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* Modal Cyber */
+        .cyber-modal {
+            background: linear-gradient(135deg, #0a0c0f 0%, #0d1117 100%);
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+        }
+        
+        /* Input Cyber */
+        .cyber-input {
+            background: rgba(0, 0, 0, 0.5);
             border: 1px solid #00ffff33;
             color: #00ffff;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 10px 15px;
+            border-radius: 6px;
             width: 100%;
-            font-family: 'Share Tech Mono', monospace;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
         
-        .terminal-input:focus {
+        .cyber-input:focus {
             outline: none;
             border-color: #00ffff;
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
         }
         
-        /* Status Indicators */
-        .status-led {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        .cyber-input::placeholder {
+            color: #00ffff55;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        
-        /* Matrix Rain Drop */
-        .matrix-drop {
-            position: fixed;
-            color: #00ffff;
-            font-family: monospace;
-            font-size: 14px;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.6;
-        }
-        
-        /* 3D Tilt Effect */
-        .tilt-card {
-            transform-style: preserve-3d;
-            transition: transform 0.1s;
-        }
-        
-        /* Scrollbar */
+        /* Scrollbar Cyber */
         ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
+            width: 8px;
+            height: 8px;
         }
         
         ::-webkit-scrollbar-track {
-            background: #050505;
+            background: #0a0c0f;
+            border-left: 1px solid #00ffff33;
         }
         
         ::-webkit-scrollbar-thumb {
@@ -229,11 +262,16 @@
             border-radius: 4px;
         }
         
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ffffcc;
+        }
+        
         /* Loading Animation */
-        .cyber-loader {
-            width: 48px;
-            height: 48px;
-            border: 3px solid #00ffff33;
+        .cyber-loading {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #00ffff33;
             border-top-color: #00ffff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -243,127 +281,156 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Data Stream Effect */
-        .data-stream {
-            position: absolute;
-            background: linear-gradient(180deg, transparent, #00ffff, transparent);
-            width: 2px;
-            height: 100px;
-            animation: stream 2s linear infinite;
+        /* Typing Effect */
+        .typing {
+            overflow: hidden;
+            border-right: 2px solid #00ffff;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
         }
         
-        @keyframes stream {
-            0% { transform: translateY(-100px); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ffff; }
+        }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: skew(0deg, 0deg); opacity: 1; }
+            95% { transform: skew(0deg, 0deg); opacity: 1; }
+            96% { transform: skew(5deg, 2deg); opacity: 0.8; }
+            97% { transform: skew(-3deg, -1deg); opacity: 0.9; }
+            98% { transform: skew(0deg, 0deg); opacity: 1; }
         }
     </style>
 </head>
-<body>
+<body class="text-gray-300">
 
-<!-- 3D Background Canvas -->
-<canvas id="bgCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
-<canvas id="networkCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+<!-- Matrix Rain Background -->
+<canvas id="matrixCanvas" class="matrix-bg"></canvas>
+<div class="scan-line"></div>
 
-<div class="relative z-10">
+<!-- Main App Container -->
+<div id="app" class="flex h-screen relative z-10">
     <!-- Sidebar -->
-    <div class="fixed left-0 top-0 h-full w-72 bg-black/90 backdrop-blur-xl border-r border-[#00ffff33] transform -translate-x-full lg:translate-x-0 transition-all duration-500 z-30" id="sidebar">
-        <div class="p-6">
-            <!-- Logo -->
-            <div class="flex items-center space-x-3 mb-8">
-                <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/30">
-                    <i class="fas fa-shield-virus text-white text-2xl"></i>
+    <div class="cyber-sidebar fixed lg:relative w-72 z-30 transform -translate-x-full lg:translate-x-0 transition-transform duration-300" id="sidebar">
+        <div class="flex flex-col h-full">
+            <!-- Logo Section -->
+            <div class="p-6 border-b border-[#00ffff33]">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shield-haltered text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-cyan-400 glow-text">DeBiz X</h1>
+                            <p class="text-[10px] text-cyan-500/60 tracking-wider">SECURE ENTERPRISE SUITE</p>
+                        </div>
+                    </div>
+                    <button onclick="toggleSidebar()" class="lg:hidden text-cyan-400">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <div>
-                    <h1 class="text-xl font-bold text-cyan-400 glitch-text">DeBiz X</h1>
-                    <p class="text-[10px] text-cyan-500/60 tracking-widest">ENTERPRISE SECURITY</p>
+                <div class="mt-4 terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dot terminal-dot-red"></div>
+                        <div class="terminal-dot terminal-dot-yellow"></div>
+                        <div class="terminal-dot"></div>
+                        <span class="text-[10px] text-cyan-400 ml-2">root@debizx:~</span>
+                    </div>
+                    <p class="text-xs text-cyan-400/80 font-mono">> System status: <span class="text-green-400">ACTIVE</span></p>
+                    <p class="text-xs text-cyan-400/80 font-mono">> Security level: <span class="text-yellow-400">MAXIMUM</span></p>
+                    <p class="text-xs text-cyan-400/80 font-mono">> Encryption: <span class="text-green-400">AES-256</span></p>
                 </div>
-            </div>
-            
-            <!-- Terminal Status -->
-            <div class="bg-black/50 border border-cyan-500/20 rounded-lg p-3 mb-8 font-mono text-xs">
-                <div class="flex items-center space-x-2 mb-2">
-                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span class="text-cyan-400">SYSTEM: ONLINE</span>
-                </div>
-                <div class="text-cyan-500/60">> UPTIME: 99.99%</div>
-                <div class="text-cyan-500/60">> ENCRYPTION: AES-256</div>
-                <div class="text-cyan-500/60">> THREAT LEVEL: LOW</div>
             </div>
             
             <!-- Navigation -->
-            <nav class="space-y-2">
-                <a href="#" onclick="navigateTo('dashboard')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="dashboard">
-                    <i class="fas fa-tachometer-alt w-5 group-hover:text-cyan-400"></i>
-                    <span>DASHBOARD</span>
+            <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+                <a href="#" onclick="navigateTo('dashboard')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">DASHBOARD</span>
                     <span class="ml-auto text-[10px] text-cyan-500/40">/monitor</span>
                 </a>
-                <a href="#" onclick="navigateTo('users')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="users">
-                    <i class="fas fa-users w-5 group-hover:text-cyan-400"></i>
-                    <span>USER DATABASE</span>
+                <a href="#" onclick="navigateTo('users')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="users">
+                    <i class="fas fa-users w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">USER DATABASE</span>
                     <span class="ml-auto text-[10px] text-cyan-500/40">/access</span>
                 </a>
-                <a href="#" onclick="navigateTo('subscriptions')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="subscriptions">
-                    <i class="fas fa-credit-card w-5 group-hover:text-cyan-400"></i>
-                    <span>SUBSCRIPTIONS</span>
+                <a href="#" onclick="navigateTo('subscriptions')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="subscriptions">
+                    <i class="fas fa-credit-card w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">SUBSCRIPTIONS</span>
                     <span class="ml-auto text-[10px] text-cyan-500/40">/billing</span>
                 </a>
-                <a href="#" onclick="navigateTo('modules')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="modules">
-                    <i class="fas fa-puzzle-piece w-5 group-hover:text-cyan-400"></i>
-                    <span>MODULES</span>
+                <a href="#" onclick="navigateTo('modules')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="modules">
+                    <i class="fas fa-puzzle-piece w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">MODULES</span>
                     <span class="ml-auto text-[10px] text-cyan-500/40">/plugins</span>
                 </a>
-                <a href="#" onclick="navigateTo('payments')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="payments">
-                    <i class="fas fa-dollar-sign w-5 group-hover:text-cyan-400"></i>
-                    <span>TRANSACTIONS</span>
+                <a href="#" onclick="navigateTo('payments')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="payments">
+                    <i class="fas fa-dollar-sign w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">TRANSACTIONS</span>
                     <span class="ml-auto text-[10px] text-cyan-500/40">/ledger</span>
                 </a>
-                <a href="#" onclick="navigateTo('analytics')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="analytics">
-                    <i class="fas fa-chart-line w-5 group-hover:text-cyan-400"></i>
-                    <span>ANALYTICS</span>
+                <a href="#" onclick="navigateTo('analytics')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="analytics">
+                    <i class="fas fa-chart-line w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">ANALYTICS</span>
                     <span class="ml-auto text-[10px] text-cyan-500/40">/stats</span>
                 </a>
-                <a href="#" onclick="navigateTo('security')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="security">
-                    <i class="fas fa-shield-haltered w-5 group-hover:text-cyan-400"></i>
-                    <span>SECURITY</span>
+                <a href="#" onclick="navigateTo('security')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="security">
+                    <i class="fas fa-shield-alt w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">SECURITY</span>
                     <span class="ml-auto text-[10px] text-cyan-500/40">/firewall</span>
                 </a>
-                <a href="#" onclick="navigateTo('settings')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="settings">
-                    <i class="fas fa-cog w-5 group-hover:text-cyan-400"></i>
-                    <span>CONFIG</span>
+                <a href="#" onclick="navigateTo('settings')" class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all group" data-page="settings">
+                    <i class="fas fa-cog w-5 h-5 mr-3 group-hover:text-cyan-400"></i>
+                    <span class="font-medium">CONFIG</span>
                     <span class="ml-auto text-[10px] text-cyan-500/40">/system</span>
                 </a>
             </nav>
             
-            <!-- System Info -->
-            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-[#00ffff33]">
-                <div class="text-xs text-cyan-500/60 font-mono">
-                    <div>Powered by DeBiz X</div>
-                    <div>v4.0.0 | SECURE</div>
+            <!-- System Status -->
+            <div class="p-4 border-t border-[#00ffff33]">
+                <div class="terminal text-xs">
+                    <p class="text-cyan-400">> CONNECTION: <span class="text-green-400">SECURE</span></p>
+                    <p class="text-cyan-400">> ENCRYPTION: <span class="text-green-400">ACTIVE</span></p>
+                    <p class="text-cyan-400">> FIREWALL: <span class="text-green-400">UP</span></p>
+                    <div class="mt-2 h-1 bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" style="width: 100%"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="lg:ml-72 min-h-screen">
+    <div class="flex-1 flex flex-col overflow-hidden">
         <!-- Header -->
-        <header class="sticky top-0 z-20 bg-black/80 backdrop-blur-xl border-b border-[#00ffff33]">
-            <div class="flex items-center justify-between px-6 py-4">
-                <button onclick="toggleSidebar()" class="lg:hidden text-cyan-400 text-2xl">
-                    <i class="fas fa-bars"></i>
+        <header class="bg-black/50 backdrop-blur-md border-b border-[#00ffff33] sticky top-0 z-20">
+            <div class="flex items-center justify-between px-6 py-3">
+                <button onclick="toggleSidebar()" class="lg:hidden text-cyan-400 hover:text-cyan-300">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
                 
                 <div class="flex items-center space-x-6">
                     <!-- Search -->
-                    <div class="relative">
+                    <div class="hidden md:block relative">
                         <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-500/50 text-sm"></i>
-                        <input type="text" id="globalSearch" placeholder="SEARCH DATABASE..." class="bg-black/50 border border-cyan-500/30 rounded-lg pl-9 pr-4 py-2 text-sm text-cyan-400 placeholder-cyan-500/50 focus:outline-none focus:border-cyan-400 w-64">
+                        <input type="text" id="globalSearch" placeholder="Search database..." class="cyber-input pl-9 pr-4 py-2 text-sm w-80">
                     </div>
                     
                     <!-- Notifications -->
-                    <div class="relative cursor-pointer">
-                        <i class="fas fa-bell text-cyan-400/70 text-xl hover:text-cyan-400"></i>
+                    <div class="relative">
+                        <i class="fas fa-bell text-cyan-400/70 cursor-pointer hover:text-cyan-400 text-xl"></i>
                         <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                     </div>
                     
@@ -382,28 +449,30 @@
         </header>
 
         <!-- Page Content -->
-        <main class="p-6">
+        <main class="flex-1 overflow-y-auto p-6">
             <div id="pageContent">
-                <div class="flex flex-col items-center justify-center h-96">
-                    <div class="cyber-loader"></div>
-                    <p class="text-cyan-400 mt-4 font-mono">INITIALIZING SECURE CONNECTION...</p>
+                <div class="flex justify-center items-center h-64">
+                    <div class="cyber-loading"></div>
+                    <span class="ml-3 text-cyan-400 font-mono">INITIALIZING SECURE CONNECTION...</span>
                 </div>
             </div>
         </main>
     </div>
 </div>
 
-<!-- Login Modal -->
-<div id="loginModal" class="fixed inset-0 bg-black/95 backdrop-blur-2xl z-50 flex items-center justify-center">
-    <div class="holo-card w-full max-w-md p-8 relative">
+<!-- Login Modal (Hacker Theme) -->
+<div id="loginModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center">
+    <div class="cyber-modal rounded-2xl w-full max-w-md p-8 modal relative overflow-hidden">
+        <!-- Decorative elements -->
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
         
         <div class="text-center mb-8">
-            <div class="w-24 h-24 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-cyan-500/50">
-                <i class="fas fa-shield-virus text-white text-4xl"></i>
+            <div class="w-24 h-24 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-cyan-500/30">
+                <i class="fas fa-shield-haltered text-white text-4xl"></i>
             </div>
-            <h2 class="text-3xl font-bold text-cyan-400 glitch-text">DeBiz X</h2>
-            <p class="text-cyan-500/60 text-sm font-mono mt-2">SECURE ACCESS PORTAL v4.0</p>
+            <h2 class="text-3xl font-bold text-cyan-400 glow-text">DeBiz X</h2>
+            <p class="text-cyan-500/60 text-sm mt-1 font-mono">SECURE ACCESS PORTAL v4.0</p>
             <div class="mt-3 text-xs text-cyan-500/40 font-mono">
                 <span id="encryptionStatus">ESTABLISHING SECURE CHANNEL...</span>
             </div>
@@ -412,170 +481,114 @@
         <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="mb-5">
                 <label class="block text-sm font-mono text-cyan-400 mb-2">
-                    <i class="fas fa-envelope mr-2"></i> ACCESS ID
+                    <i class="fas fa-envelope mr-2"></i> ACCESS ID / EMAIL
                 </label>
-                <input type="email" id="loginEmail" class="terminal-input" placeholder="admin@debizx.com" required value="admin@debizx.com">
+                <input type="email" id="loginEmail" class="cyber-input" placeholder="admin@debizx.com" required value="admin@debizx.com">
             </div>
             <div class="mb-6">
                 <label class="block text-sm font-mono text-cyan-400 mb-2">
-                    <i class="fas fa-key mr-2"></i> SECURITY KEY
+                    <i class="fas fa-key mr-2"></i> SECURITY KEY / PASSWORD
                 </label>
-                <input type="password" id="loginPassword" class="terminal-input" placeholder="••••••••" required value="Admin@123">
+                <input type="password" id="loginPassword" class="cyber-input" placeholder="••••••••" required value="Admin@123">
             </div>
-            <button type="submit" class="neo-btn w-full">
+            <button type="submit" class="cyber-btn w-full py-3 font-bold tracking-wider">
                 <i class="fas fa-unlock-alt mr-2"></i> AUTHENTICATE
             </button>
         </form>
         
         <div class="mt-6 text-center text-xs text-cyan-500/40 font-mono">
-            <p>AES-256 | TLS 1.3 | SECURE ENCLAVE</p>
+            <p>SECURE ENCRYPTED CONNECTION | AES-256 | TLS 1.3</p>
             <p class="mt-1">Powered by DeBiz X Security Suite</p>
         </div>
     </div>
 </div>
 
+<!-- Toast Container -->
+<div id="toastContainer" class="fixed bottom-4 right-4 z-50"></div>
+
 <script>
-    // ============================================
-    // 3D BACKGROUND WITH THREE.JS
-    // ============================================
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bgCanvas'), alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0);
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
     
-    // Create rotating wireframe cube
-    const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ffff, wireframe: true });
-    const torusKnot = new THREE.Mesh(geometry, material);
-    scene.add(torusKnot);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     
-    // Add stars
-    const starGeometry = new THREE.BufferGeometry();
-    const starCount = 1000;
-    const starPositions = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount; i++) {
-        starPositions[i*3] = (Math.random() - 0.5) * 2000;
-        starPositions[i*3+1] = (Math.random() - 0.5) * 1000;
-        starPositions[i*3+2] = (Math.random() - 0.5) * 500;
-    }
-    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-    const starMaterial = new THREE.PointsMaterial({ color: 0x00ffff, size: 0.5 });
-    const stars = new THREE.Points(starGeometry, starMaterial);
-    scene.add(stars);
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()<>?{}[]";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
     
-    camera.position.z = 5;
-    
-    function animate3D() {
-        requestAnimationFrame(animate3D);
-        torusKnot.rotation.x += 0.005;
-        torusKnot.rotation.y += 0.01;
-        stars.rotation.y += 0.0005;
-        renderer.render(scene, camera);
-    }
-    animate3D();
-    
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-    
-    // ============================================
-    // NETWORK VISUALIZATION
-    // ============================================
-    const netCanvas = document.getElementById('networkCanvas');
-    const netCtx = netCanvas.getContext('2d');
-    netCanvas.width = window.innerWidth;
-    netCanvas.height = window.innerHeight;
-    
-    const nodes = [];
-    const nodeCount = 50;
-    for (let i = 0; i < nodeCount; i++) {
-        nodes.push({
-            x: Math.random() * netCanvas.width,
-            y: Math.random() * netCanvas.height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5
-        });
+    for (let i = 0; i < columns; i++) {
+        drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
     }
     
-    function drawNetwork() {
-        netCtx.clearRect(0, 0, netCanvas.width, netCanvas.height);
-        netCtx.strokeStyle = '#00ffff33';
-        netCtx.lineWidth = 0.5;
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(10, 12, 15, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                const dx = nodes[i].x - nodes[j].x;
-                const dy = nodes[i].y - nodes[j].y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist < 150) {
-                    netCtx.beginPath();
-                    netCtx.moveTo(nodes[i].x, nodes[i].y);
-                    netCtx.lineTo(nodes[j].x, nodes[j].y);
-                    netCtx.stroke();
-                }
-            }
-        }
+        ctx.fillStyle = '#00ffff';
+        ctx.font = fontSize + 'px monospace';
         
-        for (const node of nodes) {
-            netCtx.fillStyle = '#00ffff';
-            netCtx.beginPath();
-            netCtx.arc(node.x, node.y, 2, 0, Math.PI * 2);
-            netCtx.fill();
+        for (let i = 0; i < drops.length; i++) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillStyle = `rgba(0, 255, 255, ${Math.random() * 0.5 + 0.2})`;
+            ctx.fillText(char, i * fontSize, drops[i] * fontSize);
             
-            node.x += node.vx;
-            node.y += node.vy;
-            if (node.x < 0 || node.x > netCanvas.width) node.vx *= -1;
-            if (node.y < 0 || node.y > netCanvas.height) node.vy *= -1;
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
         }
-        
-        requestAnimationFrame(drawNetwork);
     }
-    drawNetwork();
     
+    setInterval(drawMatrix, 50);
     window.addEventListener('resize', () => {
-        netCanvas.width = window.innerWidth;
-        netCanvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     });
     
+    // Encryption status animation
+    let statusTexts = ["ESTABLISHING SECURE CHANNEL...", "HANDSHAKE COMPLETE", "ENCRYPTION ACTIVE", "SECURE CONNECTION ESTABLISHED"];
+    let statusIndex = 0;
+    setInterval(() => {
+        const statusEl = document.getElementById('encryptionStatus');
+        if (statusEl) {
+            statusIndex = (statusIndex + 1) % statusTexts.length;
+            statusEl.textContent = statusTexts[statusIndex];
+        }
+    }, 1500);
+    
     // ============================================
-    // COMPLETE WORKING BACKEND SYSTEM
+    // DeBiz X SECURE SYSTEM - COMPLETE ECOSYSTEM
     // ============================================
     
     let currentUser = null;
     let currentPage = 'dashboard';
     
-    // Initialize Database
+    // Initialize secure database
     function initDatabase() {
         if (!localStorage.getItem('debizx_users')) {
             const defaultUsers = [
-                { id: '1', fullName: 'Root Admin', email: 'admin@debizx.com', password: btoa('Admin@123'), role: 'super_admin', status: 'active', phone: '+8801712345678', company: 'DeBiz X', securityLevel: 5, createdAt: new Date().toISOString(), lastLogin: null },
-                { id: '2', fullName: 'John Doe', email: 'john@debizx.com', password: btoa('John@123'), role: 'client', status: 'active', phone: '+8801712345679', company: 'Tech Corp', securityLevel: 2, createdAt: new Date().toISOString(), lastLogin: null },
-                { id: '3', fullName: 'Jane Smith', email: 'jane@debizx.com', password: btoa('Jane@123'), role: 'manager', status: 'active', phone: '+8801712345680', company: 'Creative Inc', securityLevel: 3, createdAt: new Date().toISOString(), lastLogin: null },
-                { id: '4', fullName: 'Alice Johnson', email: 'alice@debizx.com', password: btoa('Alice@123'), role: 'client', status: 'inactive', phone: '+8801712345681', company: 'Startup Ltd', securityLevel: 1, createdAt: new Date().toISOString(), lastLogin: null }
+                { id: '1', fullName: 'Root Admin', email: 'admin@debizx.com', password: btoa('Admin@123'), role: 'super_admin', status: 'active', phone: '+8801712345678', company: 'DeBiz X', createdAt: new Date().toISOString(), lastLogin: null, securityLevel: 5 },
+                { id: '2', fullName: 'John Doe', email: 'john@debizx.com', password: btoa('John@123'), role: 'client', status: 'active', phone: '+8801712345679', company: 'Tech Solutions', createdAt: new Date().toISOString(), lastLogin: null, securityLevel: 2 },
+                { id: '3', fullName: 'Jane Smith', email: 'jane@debizx.com', password: btoa('Jane@123'), role: 'manager', status: 'active', phone: '+8801712345680', company: 'Creative Agency', createdAt: new Date().toISOString(), lastLogin: null, securityLevel: 3 }
             ];
             localStorage.setItem('debizx_users', JSON.stringify(defaultUsers));
-        }
-        
-        if (!localStorage.getItem('debizx_modules')) {
-            const defaultModules = [
-                { id: '1', name: 'core_security', displayName: 'Core Security Engine', version: '3.2.0', isActive: true, isGlobal: true, description: 'Enterprise grade security and encryption protocols', icon: 'fa-shield-haltered' },
-                { id: '2', name: 'intrusion_detection', displayName: 'IDS/IPS System', version: '2.1.0', isActive: true, isGlobal: true, description: 'Real-time intrusion detection and prevention', icon: 'fa-eye' },
-                { id: '3', name: 'data_encryption', displayName: 'Encryption Engine', version: '1.8.0', isActive: true, isGlobal: true, description: 'AES-256 encryption for all data at rest', icon: 'fa-lock' },
-                { id: '4', name: 'analytics_suite', displayName: 'Analytics Suite', version: '1.5.0', isActive: true, isGlobal: false, description: 'Advanced analytics and reporting tools', icon: 'fa-chart-line' },
-                { id: '5', name: 'threat_intel', displayName: 'Threat Intelligence', version: '1.2.0', isActive: false, isGlobal: false, description: 'Real-time threat intelligence feed', icon: 'fa-bug' }
-            ];
-            localStorage.setItem('debizx_modules', JSON.stringify(defaultModules));
         }
         
         if (!localStorage.getItem('debizx_subscriptions')) {
             localStorage.setItem('debizx_subscriptions', JSON.stringify([]));
         }
         
-        if (!localStorage.getItem('debizx_payments')) {
-            localStorage.setItem('debizx_payments', JSON.stringify([]));
+        if (!localStorage.getItem('debizx_modules')) {
+            const defaultModules = [
+                { id: '1', name: 'core_security', displayName: 'Core Security Module', version: '3.2.0', isActive: true, isGlobal: true, description: 'Enterprise grade security and encryption', icon: 'fa-shield-haltered' },
+                { id: '2', name: 'intrusion_detection', displayName: 'Intrusion Detection', version: '2.1.0', isActive: true, isGlobal: true, description: 'Real-time threat monitoring', icon: 'fa-eye' },
+                { id: '3', name: 'data_encryption', displayName: 'Data Encryption Engine', version: '1.8.0', isActive: true, isGlobal: true, description: 'AES-256 encryption for all data', icon: 'fa-lock' },
+                { id: '4', name: 'analytics_suite', displayName: 'Analytics Suite', version: '1.5.0', isActive: true, isGlobal: false, description: 'Advanced analytics and reporting', icon: 'fa-chart-line' }
+            ];
+            localStorage.setItem('debizx_modules', JSON.stringify(defaultModules));
         }
         
         if (!localStorage.getItem('debizx_activities')) {
@@ -587,26 +600,18 @@
                 systemName: 'DeBiz X',
                 securityLevel: 'MAXIMUM',
                 encryptionEnabled: true,
-                twoFactorRequired: false,
-                sessionTimeout: 30,
+                twoFactorRequired: true,
+                sessionTimeout: 15,
                 auditLogRetention: 90
             }));
         }
     }
     
-    // Helper Functions
     function showToast(message, type = 'success') {
-        const container = document.getElementById('toastContainer') || (() => {
-            const div = document.createElement('div');
-            div.id = 'toastContainer';
-            div.className = 'fixed bottom-4 right-4 z-50 space-y-2';
-            document.body.appendChild(div);
-            return div;
-        })();
-        
+        const container = document.getElementById('toastContainer');
         const toast = document.createElement('div');
-        toast.className = `holo-card p-3 text-sm font-mono animate-bounce border-l-4 ${type === 'success' ? 'border-green-500 text-green-400' : 'border-red-500 text-red-400'}`;
-        toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} mr-2"></i>${message}`;
+        toast.className = `mb-2 p-3 rounded-lg border font-mono text-sm animate-slide-up bg-black/90 backdrop-blur-md border-${type === 'success' ? 'green-500' : type === 'error' ? 'red-500' : 'cyan-500'} text-${type === 'success' ? 'green-400' : type === 'error' ? 'red-400' : 'cyan-400'}`;
+        toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : 'info-circle'} mr-2"></i>${message}`;
         container.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
     }
@@ -618,11 +623,10 @@
     function getSubscriptions() { return JSON.parse(localStorage.getItem('debizx_subscriptions') || '[]'); }
     function saveSubscriptions(subs) { localStorage.setItem('debizx_subscriptions', JSON.stringify(subs)); }
     function getPayments() { return JSON.parse(localStorage.getItem('debizx_payments') || '[]'); }
-    function savePayments(payments) { localStorage.setItem('debizx_payments', JSON.stringify(payments)); }
     
     function addActivity(userId, action, details) {
         const activities = JSON.parse(localStorage.getItem('debizx_activities') || '[]');
-        activities.unshift({ id: Date.now(), userId, action, details, timestamp: new Date().toISOString(), ip: 'SECURED' });
+        activities.unshift({ id: Date.now(), userId, action, details, timestamp: new Date().toISOString(), ip: 'SECURE' });
         if (activities.length > 100) activities.pop();
         localStorage.setItem('debizx_activities', JSON.stringify(activities));
     }
@@ -631,17 +635,15 @@
     function checkAuth() {
         const token = localStorage.getItem('debizx_token');
         if (token) {
-            try {
-                const userData = JSON.parse(atob(token));
-                const users = getUsers();
-                const user = users.find(u => u.id === userData.id);
-                if (user && user.status === 'active') {
-                    currentUser = user;
-                    document.getElementById('headerUserName').innerHTML = user.fullName;
-                    document.getElementById('loginModal')?.remove();
-                    return true;
-                }
-            } catch(e) {}
+            const userData = JSON.parse(atob(token));
+            const users = getUsers();
+            const user = users.find(u => u.id === userData.id);
+            if (user && user.status === 'active') {
+                currentUser = user;
+                document.getElementById('headerUserName').innerText = user.fullName;
+                document.getElementById('loginModal')?.remove();
+                return true;
+            }
         }
         return false;
     }
@@ -660,44 +662,40 @@
             localStorage.setItem('debizx_token', token);
             user.lastLogin = new Date().toISOString();
             saveUsers(users);
-            addActivity(user.id, 'LOGIN_SUCCESS', 'Secure authentication completed');
+            addActivity(user.id, 'AUTH_SUCCESS', 'Secure authentication completed');
             
-            document.getElementById('loginModal').style.display = 'none';
             document.getElementById('loginModal').remove();
             showToast('ACCESS GRANTED. Welcome to DeBiz X.', 'success');
             loadPage('dashboard');
         } else {
-            addActivity('unknown', 'LOGIN_FAILED', `Failed attempt for ${email}`);
+            addActivity('unknown', 'AUTH_FAILED', `Failed login attempt for ${email}`);
             showToast('ACCESS DENIED. Invalid credentials.', 'error');
         }
     }
     
     function logout() {
-        if (currentUser) addActivity(currentUser.id, 'LOGOUT', 'Session terminated');
+        if (currentUser) addActivity(currentUser.id, 'LOGOUT', 'User session terminated');
         localStorage.removeItem('debizx_token');
         location.reload();
     }
     
     // Navigation
-    window.toggleSidebar = function() {
+    function toggleSidebar() {
         document.getElementById('sidebar').classList.toggle('-translate-x-full');
-    };
+    }
     
-    window.navigateTo = function(page) {
+    function navigateTo(page) {
         currentPage = page;
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('bg-cyan-500/10', 'text-cyan-400');
-        });
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('bg-cyan-500/10', 'text-cyan-400'));
         const activeItem = document.querySelector(`[data-page="${page}"]`);
         if (activeItem) activeItem.classList.add('bg-cyan-500/10', 'text-cyan-400');
         loadPage(page);
-        if (window.innerWidth < 1024) window.toggleSidebar();
-    };
+        if (window.innerWidth < 1024) toggleSidebar();
+    }
     
-    // Page Rendering
     async function loadPage(page) {
         const contentDiv = document.getElementById('pageContent');
-        contentDiv.innerHTML = '<div class="flex flex-col items-center justify-center h-96"><div class="cyber-loader"></div><p class="text-cyan-400 mt-4 font-mono">LOADING SECURE DATA...</p></div>';
+        contentDiv.innerHTML = '<div class="flex justify-center items-center h-64"><div class="cyber-loading"></div><span class="ml-3 text-cyan-400 font-mono">LOADING SECURE DATA...</span></div>';
         
         switch(page) {
             case 'dashboard': await renderDashboard(); break;
@@ -715,26 +713,24 @@
     async function renderDashboard() {
         const users = getUsers();
         const modules = getModules();
-        const activities = JSON.parse(localStorage.getItem('debizx_activities') || '[]').slice(0, 5);
-        const payments = getPayments();
-        const totalRevenue = payments.reduce((sum, p) => sum + p.amount, 0);
+        const activities = JSON.parse(localStorage.getItem('debizx_activities') || '[]').slice(0, 6);
         
         const html = `
             <div>
-                <!-- Dashboard Header -->
+                <!-- Header -->
                 <div class="mb-8">
                     <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
                         <i class="fas fa-terminal"></i>
-                        <span>root@debizx:~/dashboard</span>
+                        <span>root@debizx:/dashboard</span>
                         <span class="text-gray-600">$</span>
                     </div>
-                    <h1 class="text-4xl font-bold text-cyan-400 glitch-text">SECURE DASHBOARD</h1>
-                    <p class="text-gray-400 mt-2 font-mono">Welcome back, ${currentUser?.fullName}. System security level: MAXIMUM</p>
+                    <h1 class="text-3xl font-bold text-cyan-400 glow-text glitch">SECURE DASHBOARD</h1>
+                    <p class="text-gray-400 mt-1 font-mono">Welcome back, ${currentUser?.fullName}. System security level: MAXIMUM</p>
                 </div>
                 
-                <!-- Stats Grid -->
+                <!-- Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="holo-card p-6 tilt-card" data-tilt>
+                    <div class="hacker-card rounded-xl p-6 glow-hover">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-cyan-400/60 text-xs font-mono tracking-wider">TOTAL USERS</p>
@@ -746,7 +742,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="holo-card p-6">
+                    <div class="hacker-card rounded-xl p-6 glow-hover">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-cyan-400/60 text-xs font-mono tracking-wider">ACTIVE MODULES</p>
@@ -758,7 +754,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="holo-card p-6">
+                    <div class="hacker-card rounded-xl p-6 glow-hover">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-cyan-400/60 text-xs font-mono tracking-wider">SECURITY SCORE</p>
@@ -770,15 +766,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="holo-card p-6">
+                    <div class="hacker-card rounded-xl p-6 glow-hover">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-cyan-400/60 text-xs font-mono tracking-wider">TOTAL REVENUE</p>
-                                <p class="text-3xl font-bold text-cyan-400 mt-1">$${totalRevenue.toLocaleString()}</p>
-                                <p class="text-green-400 text-xs mt-2"><i class="fas fa-arrow-up"></i> +23%</p>
+                                <p class="text-cyan-400/60 text-xs font-mono tracking-wider">ENCRYPTION</p>
+                                <p class="text-3xl font-bold text-cyan-400 mt-1">AES-256</p>
+                                <p class="text-green-400 text-xs mt-2"><i class="fas fa-lock"></i> ACTIVE</p>
                             </div>
                             <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
-                                <i class="fas fa-dollar-sign text-cyan-400 text-xl"></i>
+                                <i class="fas fa-lock text-cyan-400 text-xl"></i>
                             </div>
                         </div>
                     </div>
@@ -786,24 +782,24 @@
                 
                 <!-- Charts -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                    <div class="holo-card p-6">
-                        <h3 class="text-lg font-semibold text-cyan-400 mb-4 font-mono"><i class="fas fa-chart-line mr-2"></i> THREAT MONITOR</h3>
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4 font-mono"><i class="fas fa-chart-line mr-2"></i> SECURITY THREAT MONITOR</h3>
                         <canvas id="threatChart" height="250"></canvas>
                     </div>
-                    <div class="holo-card p-6">
-                        <h3 class="text-lg font-semibold text-cyan-400 mb-4 font-mono"><i class="fas fa-users mr-2"></i> USER ACTIVITY</h3>
-                        <canvas id="activityChart" height="250"></canvas>
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4 font-mono"><i class="fas fa-users mr-2"></i> ACCESS LOGS</h3>
+                        <canvas id="accessChart" height="250"></canvas>
                     </div>
                 </div>
                 
                 <!-- Recent Security Events -->
-                <div class="holo-card overflow-hidden">
+                <div class="hacker-card rounded-xl overflow-hidden">
                     <div class="px-6 py-4 border-b border-[#00ffff33] bg-cyan-500/5">
                         <h3 class="font-semibold text-cyan-400 font-mono"><i class="fas fa-list-alt mr-2"></i> SECURITY EVENT LOG</h3>
                     </div>
                     <div class="divide-y divide-[#00ffff11]">
                         ${activities.length > 0 ? activities.map(activity => `
-                            <div class="px-6 py-3 flex items-center justify-between hover:bg-cyan-500/5 transition">
+                            <div class="px-6 py-3 flex items-center justify-between hover:bg-cyan-500/5">
                                 <div class="flex items-center">
                                     <div class="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
                                     <div>
@@ -821,7 +817,6 @@
         
         document.getElementById('pageContent').innerHTML = html;
         
-        // Initialize charts
         const threatCtx = document.getElementById('threatChart')?.getContext('2d');
         if (threatCtx) {
             new Chart(threatCtx, {
@@ -841,9 +836,9 @@
             });
         }
         
-        const activityCtx = document.getElementById('activityChart')?.getContext('2d');
-        if (activityCtx) {
-            new Chart(activityCtx, {
+        const accessCtx = document.getElementById('accessChart')?.getContext('2d');
+        if (accessCtx) {
+            new Chart(accessCtx, {
                 type: 'bar',
                 data: {
                     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -857,9 +852,6 @@
                 options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { labels: { color: '#00ffff' } } } }
             });
         }
-        
-        // GSAP animations
-        gsap.from('.holo-card', { duration: 0.5, y: 50, opacity: 0, stagger: 0.1 });
     }
     
     async function renderUsers() {
@@ -867,50 +859,30 @@
         
         const html = `
             <div>
-                <div class="mb-8">
+                <div class="mb-6">
                     <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
                         <i class="fas fa-terminal"></i>
                         <span>root@debizx:/users</span>
                     </div>
-                    <h1 class="text-4xl font-bold text-cyan-400">USER DATABASE</h1>
-                    <p class="text-gray-400 mt-2 font-mono">Manage access control and user permissions</p>
+                    <h1 class="text-3xl font-bold text-cyan-400">USER DATABASE</h1>
+                    <p class="text-gray-400 mt-1 font-mono">Manage access control and user permissions</p>
                 </div>
                 
-                <div class="holo-card overflow-hidden">
+                <div class="hacker-card rounded-xl overflow-hidden">
                     <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead class="bg-cyan-500/5 border-b border-[#00ffff33]">
-                                <tr>
-                                    <th class="text-left px-6 py-4 text-xs font-semibold text-cyan-400 uppercase tracking-wider">USER</th>
-                                    <th class="text-left px-6 py-4 text-xs font-semibold text-cyan-400 uppercase tracking-wider">ROLE</th>
-                                    <th class="text-left px-6 py-4 text-xs font-semibold text-cyan-400 uppercase tracking-wider">STATUS</th>
-                                    <th class="text-left px-6 py-4 text-xs font-semibold text-cyan-400 uppercase tracking-wider">SECURITY</th>
-                                    <th class="text-left px-6 py-4 text-xs font-semibold text-cyan-400 uppercase tracking-wider">LAST ACCESS</th>
-                                    <th class="text-right px-6 py-4 text-xs font-semibold text-cyan-400 uppercase tracking-wider">ACTIONS</th>
-                                </tr>
+                        <table class="cyber-table">
+                            <thead>
+                                <tr><th>USER</th><th>ROLE</th><th>STATUS</th><th>SECURITY LEVEL</th><th>LAST ACCESS</th><th>ACTIONS</th></tr>
                             </thead>
-                            <tbody class="divide-y divide-[#00ffff11]">
+                            <tbody>
                                 ${users.map(user => `
-                                    <tr class="hover:bg-cyan-500/5 transition">
-                                        <td class="px-6 py-4">
-                                            <div class="flex items-center space-x-3">
-                                                <div class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center">
-                                                    <i class="fas fa-user text-cyan-400 text-sm"></i>
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-cyan-400">${user.fullName}</p>
-                                                    <p class="text-xs text-gray-500 font-mono">${user.email}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded border border-cyan-500/50 text-cyan-400">${user.role.toUpperCase()}</span></td>
-                                        <td class="px-6 py-4"><span class="status-${user.status} px-2 py-1 text-xs rounded">${user.status.toUpperCase()}</span></td>
-                                        <td class="px-6 py-4"><span class="text-green-400 font-mono">L${user.securityLevel}</span></td>
-                                        <td class="px-6 py-4 text-xs font-mono text-gray-500">${user.lastLogin ? new Date(user.lastLogin).toLocaleString() : 'NEVER'}</td>
-                                        <td class="px-6 py-4 text-right">
-                                            <button onclick="toggleUserStatus('${user.id}')" class="text-yellow-400 hover:text-yellow-300 mr-3 transition"><i class="fas fa-ban"></i></button>
-                                            <button onclick="deleteUser('${user.id}')" class="text-red-400 hover:text-red-300 transition"><i class="fas fa-trash"></i></button>
-                                        </td>
+                                    <tr>
+                                        <td><div><p class="font-medium text-cyan-400">${user.fullName}</p><p class="text-xs text-gray-500 font-mono">${user.email}</p></div></td>
+                                        <td><span class="px-2 py-1 text-xs rounded border border-cyan-500/50 text-cyan-400">${user.role.toUpperCase()}</span></td>
+                                        <td><span class="status-${user.status}">${user.status.toUpperCase()}</span></td>
+                                        <td><span class="text-green-400">LEVEL ${user.securityLevel || 1}</span></td>
+                                        <td class="font-mono text-xs">${user.lastLogin ? new Date(user.lastLogin).toLocaleString() : 'NEVER'}</td>
+                                        <td><button onclick="toggleUserStatus('${user.id}')" class="text-yellow-400 hover:text-yellow-300 mr-2"><i class="fas fa-ban"></i></button><button onclick="deleteUser('${user.id}')" class="text-red-400 hover:text-red-300"><i class="fas fa-trash"></i></button></td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -919,9 +891,7 @@
                 </div>
             </div>
         `;
-        
         document.getElementById('pageContent').innerHTML = html;
-        gsap.from('.holo-card', { duration: 0.5, scale: 0.95, opacity: 0 });
     }
     
     async function renderModules() {
@@ -929,389 +899,151 @@
         
         const html = `
             <div>
-                <div class="mb-8">
+                <div class="mb-6">
                     <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
                         <i class="fas fa-terminal"></i>
                         <span>root@debizx:/modules</span>
                     </div>
-                    <h1 class="text-4xl font-bold text-cyan-400">SECURITY MODULES</h1>
-                    <p class="text-gray-400 mt-2 font-mono">Manage system modules and security features</p>
+                    <h1 class="text-3xl font-bold text-cyan-400">SECURITY MODULES</h1>
+                    <p class="text-gray-400 mt-1 font-mono">Manage system modules and security features</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     ${modules.map(module => `
-                        <div class="holo-card p-6">
+                        <div class="hacker-card rounded-xl p-6">
                             <div class="flex items-center justify-between mb-4">
-                                <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
                                     <i class="fas ${module.icon || 'fa-cube'} text-cyan-400 text-xl"></i>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" class="sr-only peer" ${module.isActive ? 'checked' : ''} onchange="toggleModule('${module.id}')">
-                                    <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-cyan-400 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500/30"></div>
+                                    <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-cyan-400 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500/30"></div>
                                 </label>
                             </div>
                             <h3 class="text-lg font-bold text-cyan-400">${module.displayName}</h3>
                             <p class="text-xs text-cyan-500/60 font-mono mt-1">v${module.version}</p>
-                            <p class="text-sm text-gray-400 mt-3">${module.description}</p>
-                            <div class="mt-4 pt-4 border-t border-[#00ffff11] flex justify-between items-center">
+                            <p class="text-sm text-gray-400 mt-2">${module.description}</p>
+                            <div class="mt-4 pt-4 border-t border-[#00ffff11] flex justify-between">
                                 <span class="text-xs text-cyan-500"><i class="fas ${module.isGlobal ? 'fa-globe' : 'fa-shield'} mr-1"></i>${module.isGlobal ? 'GLOBAL' : 'PER USER'}</span>
-                                <button class="text-xs text-cyan-400 hover:text-cyan-300 transition"><i class="fas fa-cog mr-1"></i>CONFIGURE</button>
+                                <button class="text-xs text-cyan-400 hover:text-cyan-300"><i class="fas fa-cog mr-1"></i>CONFIGURE</button>
                             </div>
                         </div>
                     `).join('')}
                 </div>
             </div>
         `;
-        
-        document.getElementById('pageContent').innerHTML = html;
-        gsap.from('.holo-card', { duration: 0.5, y: 30, opacity: 0, stagger: 0.1 });
-    }
-    
-    async function renderSubscriptions() {
-        const subscriptions = getSubscriptions();
-        const users = getUsers();
-        
-        const html = `
-            <div>
-                <div class="mb-8">
-                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
-                        <i class="fas fa-terminal"></i>
-                        <span>root@debizx:/subscriptions</span>
-                    </div>
-                    <h1 class="text-4xl font-bold text-cyan-400">SUBSCRIPTION MANAGER</h1>
-                    <p class="text-gray-400 mt-2 font-mono">Manage user subscriptions and billing</p>
-                </div>
-                
-                <div class="holo-card overflow-hidden">
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead class="bg-cyan-500/5 border-b border-[#00ffff33]">
-                                <tr><th class="px-6 py-4 text-left text-xs text-cyan-400">USER</th><th class="px-6 py-4 text-left text-xs text-cyan-400">PLAN</th><th class="px-6 py-4 text-left text-xs text-cyan-400">PRICE</th><th class="px-6 py-4 text-left text-xs text-cyan-400">STATUS</th><th class="px-6 py-4 text-left text-xs text-cyan-400">EXPIRES</th><th class="px-6 py-4 text-right text-xs text-cyan-400">ACTIONS</th></tr>
-                            </thead>
-                            <tbody class="divide-y divide-[#00ffff11]">
-                                ${subscriptions.length > 0 ? subscriptions.map(sub => {
-                                    const user = users.find(u => u.id === sub.userId);
-                                    return `<tr class="hover:bg-cyan-500/5"><td class="px-6 py-4 text-cyan-400">${user?.fullName || 'Unknown'}</td><td class="px-6 py-4">${sub.planName}</td><td class="px-6 py-4">$${sub.price}</td><td class="px-6 py-4"><span class="status-active px-2 py-1 text-xs rounded">${sub.status}</span></td><td class="px-6 py-4 text-xs">${new Date(sub.endDate).toLocaleDateString()}</td><td class="px-6 py-4 text-right"><button class="text-red-400 hover:text-red-300"><i class="fas fa-times-circle"></i></button></td></tr>`;
-                                }).join('') : '<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500">No subscriptions found</td></tr>'}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="mt-6 flex justify-end">
-                    <button onclick="createTestSubscription()" class="neo-btn"><i class="fas fa-plus mr-2"></i>CREATE SUBSCRIPTION</button>
-                </div>
-            </div>
-        `;
-        
         document.getElementById('pageContent').innerHTML = html;
     }
     
-    async function renderPayments() {
-        const payments = getPayments();
-        const users = getUsers();
-        
-        const html = `
-            <div>
-                <div class="mb-8">
-                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
-                        <i class="fas fa-terminal"></i>
-                        <span>root@debizx:/transactions</span>
-                    </div>
-                    <h1 class="text-4xl font-bold text-cyan-400">TRANSACTION LEDGER</h1>
-                    <p class="text-gray-400 mt-2 font-mono">Track all financial transactions</p>
-                </div>
-                
-                <div class="holo-card overflow-hidden">
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead class="bg-cyan-500/5 border-b border-[#00ffff33]">
-                                <tr><th class="px-6 py-4 text-left text-xs text-cyan-400">TX ID</th><th class="px-6 py-4 text-left text-xs text-cyan-400">CUSTOMER</th><th class="px-6 py-4 text-left text-xs text-cyan-400">AMOUNT</th><th class="px-6 py-4 text-left text-xs text-cyan-400">METHOD</th><th class="px-6 py-4 text-left text-xs text-cyan-400">STATUS</th><th class="px-6 py-4 text-left text-xs text-cyan-400">DATE</th></tr>
-                            </thead>
-                            <tbody class="divide-y divide-[#00ffff11]">
-                                ${payments.length > 0 ? payments.map(payment => {
-                                    const user = users.find(u => u.id === payment.userId);
-                                    return `<tr class="hover:bg-cyan-500/5"><td class="px-6 py-4 text-xs font-mono text-cyan-400">${payment.transactionId}</td><td class="px-6 py-4">${user?.fullName || 'Unknown'}</td><td class="px-6 py-4 text-green-400">$${payment.amount}</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded bg-cyan-500/20 text-cyan-400">${payment.method.toUpperCase()}</span></td><td class="px-6 py-4"><span class="status-active px-2 py-1 text-xs rounded">${payment.status}</span></td><td class="px-6 py-4 text-xs text-gray-500">${new Date(payment.date).toLocaleDateString()}</td></tr>`;
-                                }).join('') : '<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500">No transactions found</td></tr>'}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="mt-6 flex justify-end">
-                    <button onclick="createTestPayment()" class="neo-btn"><i class="fas fa-plus mr-2"></i>ADD TEST PAYMENT</button>
-                </div>
-            </div>
-        `;
-        
-        document.getElementById('pageContent').innerHTML = html;
-    }
-    
-    async function renderAnalytics() {
-        const users = getUsers();
-        const payments = getPayments();
-        const totalRevenue = payments.reduce((sum, p) => sum + p.amount, 0);
-        
-        const html = `
-            <div>
-                <div class="mb-8">
-                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
-                        <i class="fas fa-terminal"></i>
-                        <span>root@debizx:/analytics</span>
-                    </div>
-                    <h1 class="text-4xl font-bold text-cyan-400">ANALYTICS ENGINE</h1>
-                    <p class="text-gray-400 mt-2 font-mono">Real-time business intelligence</p>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                    <div class="holo-card p-6">
-                        <h3 class="text-lg font-semibold text-cyan-400 mb-4">REVENUE TREND</h3>
-                        <canvas id="revenueTrendChart" height="250"></canvas>
-                    </div>
-                    <div class="holo-card p-6">
-                        <h3 class="text-lg font-semibold text-cyan-400 mb-4">USER GROWTH</h3>
-                        <canvas id="userGrowthChart" height="250"></canvas>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="holo-card p-6 text-center">
-                        <i class="fas fa-users text-cyan-400 text-3xl mb-3"></i>
-                        <p class="text-3xl font-bold text-cyan-400">${users.length}</p>
-                        <p class="text-sm text-gray-500">Total Users</p>
-                    </div>
-                    <div class="holo-card p-6 text-center">
-                        <i class="fas fa-dollar-sign text-cyan-400 text-3xl mb-3"></i>
-                        <p class="text-3xl font-bold text-cyan-400">$${totalRevenue.toLocaleString()}</p>
-                        <p class="text-sm text-gray-500">Total Revenue</p>
-                    </div>
-                    <div class="holo-card p-6 text-center">
-                        <i class="fas fa-chart-line text-cyan-400 text-3xl mb-3"></i>
-                        <p class="text-3xl font-bold text-cyan-400">${Math.round(totalRevenue / (users.length || 1))}</p>
-                        <p class="text-sm text-gray-500">Avg. Revenue/User</p>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        document.getElementById('pageContent').innerHTML = html;
-        
-        const revenueCtx = document.getElementById('revenueTrendChart')?.getContext('2d');
-        if (revenueCtx) {
-            new Chart(revenueCtx, {
-                type: 'line',
-                data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], datasets: [{ label: 'Revenue', data: [12500, 15000, 14800, 17200, 18900, totalRevenue], borderColor: '#00ffff', fill: true }] },
-                options: { responsive: true }
-            });
-        }
-        
-        const growthCtx = document.getElementById('userGrowthChart')?.getContext('2d');
-        if (growthCtx) {
-            new Chart(growthCtx, {
-                type: 'bar',
-                data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], datasets: [{ label: 'New Users', data: [12, 19, 15, 22, 18, users.length], backgroundColor: '#00ffff' }] },
-                options: { responsive: true }
-            });
+    function toggleModule(moduleId) {
+        const modules = getModules();
+        const module = modules.find(m => m.id === moduleId);
+        if (module) {
+            module.isActive = !module.isActive;
+            saveModules(modules);
+            showToast(`${module.displayName} ${module.isActive ? 'ACTIVATED' : 'DEACTIVATED'}`, 'success');
+            renderModules();
         }
     }
+    
+    function toggleUserStatus(userId) {
+        const users = getUsers();
+        const user = users.find(u => u.id === userId);
+        if (user && user.role !== 'super_admin') {
+            user.status = user.status === 'active' ? 'blocked' : 'active';
+            saveUsers(users);
+            showToast(`User ${user.fullName} ${user.status === 'active' ? 'UNBLOCKED' : 'BLOCKED'}`, 'success');
+            renderUsers();
+        }
+    }
+    
+    function deleteUser(userId) {
+        if (confirm('WARNING: This action cannot be undone. Delete user?')) {
+            const users = getUsers();
+            const filtered = users.filter(u => u.id !== userId);
+            saveUsers(filtered);
+            showToast('User deleted from database', 'success');
+            renderUsers();
+        }
+    }
+    
+    async function renderSubscriptions() { document.getElementById('pageContent').innerHTML = '<div class="hacker-card rounded-xl p-8 text-center"><i class="fas fa-credit-card text-cyan-400 text-4xl mb-4"></i><h3 class="text-xl text-cyan-400">Subscription Manager</h3><p class="text-gray-400 mt-2 font-mono">Module under construction</p></div>'; }
+    async function renderPayments() { document.getElementById('pageContent').innerHTML = '<div class="hacker-card rounded-xl p-8 text-center"><i class="fas fa-dollar-sign text-cyan-400 text-4xl mb-4"></i><h3 class="text-xl text-cyan-400">Transaction Ledger</h3><p class="text-gray-400 mt-2 font-mono">Module under construction</p></div>'; }
+    async function renderAnalytics() { document.getElementById('pageContent').innerHTML = '<div class="hacker-card rounded-xl p-8 text-center"><i class="fas fa-chart-line text-cyan-400 text-4xl mb-4"></i><h3 class="text-xl text-cyan-400">Analytics Engine</h3><p class="text-gray-400 mt-2 font-mono">Module under construction</p></div>'; }
     
     async function renderSecurity() {
         const html = `
             <div>
-                <div class="mb-8">
-                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
-                        <i class="fas fa-terminal"></i>
-                        <span>root@debizx:/security</span>
-                    </div>
-                    <h1 class="text-4xl font-bold text-cyan-400">SECURITY CENTER</h1>
-                    <p class="text-gray-400 mt-2 font-mono">Firewall rules, encryption, and security policies</p>
+                <div class="mb-6">
+                    <h1 class="text-3xl font-bold text-cyan-400">SECURITY CENTER</h1>
+                    <p class="text-gray-400 mt-1 font-mono">Firewall rules, encryption settings, and security policies</p>
                 </div>
-                
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="holo-card p-6">
+                    <div class="hacker-card rounded-xl p-6">
                         <h3 class="text-lg font-semibold text-cyan-400 mb-4"><i class="fas fa-shield-alt mr-2"></i>FIREWALL STATUS</h3>
                         <div class="space-y-3">
-                            <div class="flex justify-between items-center py-2 border-b border-[#00ffff11]"><span class="text-gray-400">Inbound Traffic</span><span class="text-green-400"><i class="fas fa-check-circle mr-1"></i>BLOCKED</span></div>
-                            <div class="flex justify-between items-center py-2 border-b border-[#00ffff11]"><span class="text-gray-400">Outbound Traffic</span><span class="text-yellow-400"><i class="fas fa-chart-line mr-1"></i>MONITORED</span></div>
-                            <div class="flex justify-between items-center py-2 border-b border-[#00ffff11]"><span class="text-gray-400">DDoS Protection</span><span class="text-green-400"><i class="fas fa-check-circle mr-1"></i>ACTIVE</span></div>
-                            <div class="flex justify-between items-center py-2"><span class="text-gray-400">Rate Limiting</span><span class="text-green-400"><i class="fas fa-check-circle mr-1"></i>ENABLED</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Inbound Traffic</span><span class="text-green-400">BLOCKED</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Outbound Traffic</span><span class="text-green-400">MONITORED</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">DDoS Protection</span><span class="text-green-400">ACTIVE</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Rate Limiting</span><span class="text-green-400">ENABLED</span></div>
                         </div>
                     </div>
-                    <div class="holo-card p-6">
+                    <div class="hacker-card rounded-xl p-6">
                         <h3 class="text-lg font-semibold text-cyan-400 mb-4"><i class="fas fa-lock mr-2"></i>ENCRYPTION STATUS</h3>
                         <div class="space-y-3">
-                            <div class="flex justify-between items-center py-2 border-b border-[#00ffff11]"><span class="text-gray-400">Database</span><span class="text-green-400">AES-256</span></div>
-                            <div class="flex justify-between items-center py-2 border-b border-[#00ffff11]"><span class="text-gray-400">TLS Version</span><span class="text-green-400">1.3</span></div>
-                            <div class="flex justify-between items-center py-2 border-b border-[#00ffff11]"><span class="text-gray-400">Key Rotation</span><span class="text-green-400">30 DAYS</span></div>
-                            <div class="flex justify-between items-center py-2"><span class="text-gray-400">Backup Encryption</span><span class="text-green-400">ENABLED</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Database</span><span class="text-green-400">AES-256</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">TLS Version</span><span class="text-green-400">1.3</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Key Rotation</span><span class="text-green-400">30 DAYS</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-400">Backup Encryption</span><span class="text-green-400">ENABLED</span></div>
                         </div>
                     </div>
                 </div>
             </div>
         `;
-        
         document.getElementById('pageContent').innerHTML = html;
     }
     
     async function renderSettings() {
         const html = `
             <div>
-                <div class="mb-8">
-                    <div class="flex items-center space-x-2 text-cyan-400 font-mono text-sm mb-2">
-                        <i class="fas fa-terminal"></i>
-                        <span>root@debizx:/config</span>
-                    </div>
-                    <h1 class="text-4xl font-bold text-cyan-400">SYSTEM CONFIGURATION</h1>
-                    <p class="text-gray-400 mt-2 font-mono">DeBiz X Enterprise Security Suite v4.0</p>
+                <div class="mb-6">
+                    <h1 class="text-3xl font-bold text-cyan-400">SYSTEM CONFIGURATION</h1>
+                    <p class="text-gray-400 mt-1 font-mono">DeBiz X Enterprise Security Suite v4.0</p>
                 </div>
-                
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="holo-card p-6">
-                        <h3 class="text-lg font-semibold text-cyan-400 mb-4">System Information</h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between"><span class="text-gray-400">Version</span><span class="text-cyan-400">4.0.0-enterprise</span></div>
-                            <div class="flex justify-between"><span class="text-gray-400">Build Date</span><span class="text-cyan-400">2024-01-15</span></div>
-                            <div class="flex justify-between"><span class="text-gray-400">License</span><span class="text-cyan-400">Enterprise Unlimited</span></div>
-                            <div class="flex justify-between"><span class="text-gray-400">Powered by</span><span class="text-cyan-400 font-bold">DeBiz X</span></div>
+                    <div class="hacker-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4">Powered by DeBiz X</h3>
+                        <p class="text-gray-400 font-mono text-sm">Enterprise Security Suite | All Rights Reserved</p>
+                        <div class="mt-4 pt-4 border-t border-[#00ffff11]">
+                            <p class="text-xs text-cyan-500/60 font-mono">© 2024 DeBiz X. All systems operational.</p>
                         </div>
                     </div>
-                    <div class="holo-card p-6">
+                    <div class="hacker-card rounded-xl p-6">
                         <h3 class="text-lg font-semibold text-cyan-400 mb-4">System Health</h3>
-                        <div class="space-y-4">
-                            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-400">CPU Usage</span><span class="text-cyan-400">23%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:23%"></div></div></div>
-                            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-400">Memory Usage</span><span class="text-cyan-400">45%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:45%"></div></div></div>
-                            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-400">Storage</span><span class="text-cyan-400">32%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:32%"></div></div></div>
+                        <div class="space-y-3">
+                            <div><div class="flex justify-between text-sm mb-1"><span>CPU Usage</span><span>23%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:23%"></div></div></div>
+                            <div><div class="flex justify-between text-sm mb-1"><span>Memory Usage</span><span>45%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:45%"></div></div></div>
+                            <div><div class="flex justify-between text-sm mb-1"><span>Storage</span><span>32%</span></div><div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="h-full bg-cyan-400 rounded-full" style="width:32%"></div></div></div>
                         </div>
                     </div>
                 </div>
             </div>
         `;
-        
         document.getElementById('pageContent').innerHTML = html;
     }
     
-    // Action Functions
-    window.toggleModule = function(moduleId) {
-        const modules = getModules();
-        const module = modules.find(m => m.id === moduleId);
-        if (module) {
-            module.isActive = !module.isActive;
-            saveModules(modules);
-            addActivity(currentUser.id, 'MODULE_TOGGLE', `${module.displayName} ${module.isActive ? 'ACTIVATED' : 'DEACTIVATED'}`);
-            showToast(`${module.displayName} ${module.isActive ? 'activated' : 'deactivated'}`, 'success');
-            renderModules();
-        }
-    };
-    
-    window.toggleUserStatus = function(userId) {
-        const users = getUsers();
-        const user = users.find(u => u.id === userId);
-        if (user && user.role !== 'super_admin') {
-            user.status = user.status === 'active' ? 'blocked' : 'active';
-            saveUsers(users);
-            addActivity(currentUser.id, 'USER_STATUS', `${user.fullName} ${user.status === 'active' ? 'UNBLOCKED' : 'BLOCKED'}`);
-            showToast(`User ${user.fullName} ${user.status === 'active' ? 'unblocked' : 'blocked'}`, 'success');
-            renderUsers();
-        }
-    };
-    
-    window.deleteUser = function(userId) {
-        if (confirm('WARNING: This action cannot be undone. Delete user permanently?')) {
-            const users = getUsers();
-            const filtered = users.filter(u => u.id !== userId);
-            saveUsers(filtered);
-            addActivity(currentUser.id, 'USER_DELETED', `User ID: ${userId}`);
-            showToast('User deleted from database', 'success');
-            renderUsers();
-        }
-    };
-    
-    window.createTestSubscription = function() {
-        const users = getUsers();
-        const clients = users.filter(u => u.role === 'client');
-        if (clients.length === 0) {
-            showToast('No client users found', 'error');
-            return;
-        }
-        
-        const subscriptions = getSubscriptions();
-        const newSub = {
-            id: Date.now().toString(),
-            userId: clients[0].id,
-            planName: 'Professional',
-            price: 99.99,
-            interval: 'monthly',
-            status: 'active',
-            startDate: new Date().toISOString(),
-            endDate: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-            autoRenew: true
-        };
-        subscriptions.push(newSub);
-        saveSubscriptions(subscriptions);
-        addActivity(currentUser.id, 'SUBSCRIPTION_CREATED', `Created subscription for ${clients[0].fullName}`);
-        showToast('Subscription created successfully', 'success');
-        renderSubscriptions();
-    };
-    
-    window.createTestPayment = function() {
-        const users = getUsers();
-        const clients = users.filter(u => u.role === 'client');
-        if (clients.length === 0) {
-            showToast('No client users found', 'error');
-            return;
-        }
-        
-        const payments = getPayments();
-        const newPayment = {
-            id: Date.now().toString(),
-            userId: clients[0].id,
-            amount: 99.99,
-            currency: 'USD',
-            method: 'stripe',
-            status: 'completed',
-            transactionId: 'TXN' + Date.now(),
-            date: new Date().toISOString()
-        };
-        payments.push(newPayment);
-        savePayments(payments);
-        addActivity(currentUser.id, 'PAYMENT_RECORDED', `Payment of $99.99 from ${clients[0].fullName}`);
-        showToast('Payment recorded successfully', 'success');
-        renderPayments();
-    };
+    // Export global functions
+    window.toggleSidebar = toggleSidebar;
+    window.navigateTo = navigateTo;
+    window.handleLogin = handleLogin;
+    window.toggleModule = toggleModule;
+    window.toggleUserStatus = toggleUserStatus;
+    window.deleteUser = deleteUser;
     
     // Initialize
     initDatabase();
-    if (checkAuth()) {
-        loadPage('dashboard');
-    }
-    
-    // Set active nav
+    if (checkAuth()) loadPage('dashboard');
     document.querySelector('[data-page="dashboard"]')?.classList.add('bg-cyan-500/10', 'text-cyan-400');
-    
-    // Matrix Rain Effect
-    function createMatrixRain() {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
-        setInterval(() => {
-            const drop = document.createElement('div');
-            drop.className = 'matrix-drop';
-            drop.style.left = Math.random() * window.innerWidth + 'px';
-            drop.style.top = '-20px';
-            drop.innerHTML = chars[Math.floor(Math.random() * chars.length)];
-            drop.style.color = `rgba(0, 255, 255, ${Math.random() * 0.5})`;
-            document.body.appendChild(drop);
-            
-            let pos = -20;
-            const interval = setInterval(() => {
-                pos += 5;
-                drop.style.top = pos + 'px';
-                if (pos > window.innerHeight) {
-                    clearInterval(interval);
-                    drop.remove();
-                }
-            }, 50);
-        }, 200);
-    }
-    createMatrixRain();
 </script>
 </body>
 </html>
